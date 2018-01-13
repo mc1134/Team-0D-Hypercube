@@ -26,7 +26,7 @@ data = stream.read(CHUNK)
 
 # reads wav file, makes array
 from scipy.io.wavfile import read
-a = read("wav/sound1.wav") #sound file
+a = read("wav/C.wav") #sound file
 data_int = np.array(a[1],dtype=float)
 
 # sine wave fields
@@ -42,18 +42,26 @@ sine_wave = np.array(sine_wave)
 sine_noise = np.array(sine_noise)
 
 # makes sine wave array (with noise = convoluted sine wave array)
-#data_int = sine_wave + sine_noise
+data_int = sine_wave + sine_noise
 
 # ----------------------------------------
 
 # fast fourier transform
 data_fft = np.fft.fft(data_int)
-freq = (np.abs(data_fft[:len(data_fft)]))
+#freq = (np.abs(data_fft))
+
+N = num_samples
+
+# fft.fftfreq stuff
+freq = np.fft.fftfreq(N)
+ind=np.arange(1,N/2+1)
+psd=abs(data_fft[ind])**2+abs(data_fft[-ind])**2
+plt.plot(freq[ind],psd,'k-')
 
 # plot: amplitude vs frequency
 plt.plot(freq)
-plt.title("Before filtering: Will have main signal (1000Hz) + noise frequency (50Hz)")
-plt.xlim(0,10000)
+plt.title("Relative strength vs frequency")
+plt.xlim(0,30000)
 
 # ----------------------------------------
 
@@ -62,4 +70,5 @@ fig, ax = plt.subplots()
 
 # plot that figure: amplitude vs time
 ax.plot(data_int, '-')
+plt.title("Signal vs time")
 plt.show()
