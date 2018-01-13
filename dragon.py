@@ -96,8 +96,10 @@ def getObject():
     threshold = 2250 # above this threshold = can.
 
     if getValue(data_fft) > threshold:
+        print "can"
     	return 0 # can object
     else:
+        print "bottle"
         return 1 # bottle object
 
 if __name__ == '__main__':
