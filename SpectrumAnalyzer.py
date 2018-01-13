@@ -4,10 +4,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # pyaudio fields
-CHUNK = 1024 * 4
-FORMAT = pyaudio.paInt16
-CHANNELS = 2
-RATE = 44100
+CHUNK = 1024 * 4 #how much audio is processed at a time, how many samples per frame to display
+FORMAT = pyaudio.paInt16 #depends on bits per sample
+CHANNELS = 1 #basically num of microphones
+RATE = 44100 #samples per second
 
 # instantiate pyaudio
 p = pyaudio.PyAudio()
@@ -22,6 +22,8 @@ stream = p.open(
 
 # make pyaudio array
 data = stream.read(CHUNK)
+
+# struct unpack turns the bytes of stream into integers
 #data_int = np.array(struct.unpack(str(2 * CHUNK) + 'B', data), dtype='b')[::2] + 127
 
 # reads wav file, makes array
