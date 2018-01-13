@@ -28,7 +28,7 @@ def getValue(array):
 	weightedSum = 0
 	threshold = 0.9
 	numberOfPeaks = 0   
-	for i in range(0, floor(numElements/2)): 
+	for i in range(0, int(floor(numElements/2))): 
 		if array[i] > threshold: 
 			weightedSum = weightedSum + array[i] * i
 			numberOfPeaks = numberOfPeaks + 1
@@ -51,7 +51,7 @@ threshold = 2250 # above this threshold = can.
 
 if getValue(data_fft) > threshold: 
 	print("can")
-else 
+else: 
 	print("bottle")
 
 

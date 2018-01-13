@@ -32,7 +32,8 @@ def switch(gpio):
         if gpio.digital_read(GPIO_C) == GPIO.HIGH:
             gpio.digital_write(GPIO_A, GPIO.HIGH)
             subprocess.call("./recordScript.sh")
-            time.sleep(6)
+            #time.sleep(4)
+            subprocess.call("./wavSorter.sh")
         else:
             gpio.digital_write(GPIO_A, GPIO.LOW)
             #time.sleep(1)
