@@ -35,59 +35,24 @@ def getValue(array):
 
 	return weightedSum/numberOfPeaks	
 	
-can_files = ['can1.wav', 'can2.wav', 'can3.wav']
 
-iterator = 0
-for can_file in can_files:
-	rate, data = read(can_file)
-	data = np.array(data)
-	data = data[:,0]
+filename = "trashRecording.wav"
+rate, data = read(filename)
+data = np.array(data)
+data = data[:,0]
 
-	data_fft = abs(fft(data))
-	data_fft = normalize1D(data_fft)
+data_fft = abs(fft(data))
+data_fft = normalize1D(data_fft)
 
 	
-	print(can_file + " " + str(getValue(data_fft)))
+print(filename + " " + str(getValue(data_fft)))
+
+threshold = 2250
+
+if getValue(data_fft) > threshold: 
+	print("can")
+else 
+	print("bottle")
+
+
 	
-	plt.figure(1) 
-	plt.subplot(311 + iterator)
-	plt.plot(data)	
-	plt.title("can original mono channel waveform")
-
-	plt.figure(2)
-	plt.subplot(311 + iterator)
-	plt.plot(data_fft)
-	plt.title("can fft")
-
-	iterator = iterator + 1
-
-
-bottle_files = ['bottle1.wav', 'bottle2.wav', 'bottle3.wav']
-
-iterator = 0
-for bottle_file in bottle_files: 
-	rate, data = read(bottle_file)
-	data = np.array(data)
-	data = data[:,0]
-
-	data_fft = abs(fft(data))
-	data_fft = normalize1D(data_fft)
-
-	print(bottle_file + " " + str(getValue(data_fft)))
-	
-	plt.figure(3) 
-	plt.subplot(311 + iterator)
-	plt.plot(data)	
-	plt.title("bottle original mono channel waveform")
-
-	plt.figure(4)
-	plt.subplot(311 + iterator)
-	plt.plot(data_fft)
-	plt.title("bottle fft")
-
-	iterator = iterator + 1
-
-plt.show()
-
-
-
