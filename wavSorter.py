@@ -47,7 +47,7 @@ data_fft = normalize1D(data_fft)
 	
 print(filename + " " + str(getValue(data_fft)))
 
-threshold = 2250
+threshold = 2250 # above this threshold = can. 
 
 if getValue(data_fft) > threshold: 
 	print("can")
