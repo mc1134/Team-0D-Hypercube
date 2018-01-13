@@ -2,6 +2,7 @@ import pyaudio
 import struct
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.fftpack import fft
 
 CHUNK = 1024 * 4
 FORMAT = pyaudio.paInt16
@@ -25,8 +26,15 @@ data = stream.read(CHUNK)
 from scipy.io.wavfile import read
 a = read("wav/sound3.wav")
 data_int = np.array(a[1],dtype=float)
+data_transform = fft(data_int)
+data_transform_abs = abs(data_transform)
 
-fig, ax = plt.subplots()
+# fig, ax = plt.subplots()
 
-ax.plot(data_int, '-')
+plt.figure(1)
+plt.plot(data_transform_abs, '-')
+#plt.show()
+
+plt.figure(2)
+plt.plot(data_int)
 plt.show()
